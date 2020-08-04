@@ -1,14 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Questionnaire from "../views/Questionnaire.vue";
+import CreateForm from "../views/CreateForm.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "Questionnaire",
+    component: Questionnaire,
+    props: { prop: 'yes'}
+  },
+  {
+    path: "/create",
+    name: "CreateForm",
+    component: CreateForm
   },
   {
     path: "/about",
