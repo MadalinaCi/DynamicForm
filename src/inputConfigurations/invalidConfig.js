@@ -7,8 +7,7 @@ const config = {
       {
         questionId: "1q000",
         question: "Please enter your name.",
-        required: true,
-        answerType: "text"
+        required: true
       },
       {
         questionId: "2q000",

@@ -44,7 +44,6 @@ export default {
     },
 
     groupUpdate(data) {
-      console.log("groupUpdate");
       const group = data ? data.g : null,
         id = data ? data.id : null;
 
@@ -89,8 +88,7 @@ export default {
         steps: steps
       };
 
-      console.log(config);
-      this.$router.push({path: "/?", query: config});
+      this.$router.push({ path: "/?", query: config });
     }
   }
 };

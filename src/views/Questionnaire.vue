@@ -1,35 +1,35 @@
 <template>
   <div class="questionnaire">
-    <h1> Please answer to the following questions: </h1>
-  <form class="form"  @submit.stop.prevent="submit">
-    <div v-if="error" class="error">
-      {{ error }} <br />
-      Check the console for more details.
-    </div>
-    <div
-      v-else-if="Object.keys(config).length"
-      class="step"
-      v-for="(step, index) in steps"
-      :key="`step-${index}`"
-    >
-      <h2 class="step-title">Step number: {{ index }}</h2>
-      <Question
-        v-for="(question, idx) in step"
-        :key="question.questionId"
-        :questionId="question.questionId"
-        :question="question.question"
-        :required="question.required"
-        :answerType="question.answerType"
-        :answerList="question.answerList"
-        @completed="completed"
+    <h1>Please answer to the following questions:</h1>
+    <form class="form" @submit.stop.prevent="submit">
+      <div v-if="error" class="error">
+        {{ error }} <br />
+        Check the console for more details.
+      </div>
+      <div
+        v-else-if="Object.keys(config).length"
+        class="step"
+        v-for="(step, index) in steps"
+        :key="`step-${index}`"
       >
-        {{ idx + 1 }}. {{ question.question }}
-      </Question>
-    </div>
-    <p>
-      <input type="submit" value="Submit" :disabled="requiredCompleted" />
-    </p>
-  </form>
+        <h2 class="step-title">Step number: {{ index }}</h2>
+        <Question
+          v-for="(question, idx) in step"
+          :key="question.questionId"
+          :questionId="question.questionId"
+          :question="question.question"
+          :required="question.required"
+          :answerType="question.answerType"
+          :answerList="question.answerList"
+          @completed="completed"
+        >
+          {{ idx + 1 }}. {{ question.question }}
+        </Question>
+      </div>
+      <p>
+        <input type="submit" value="Submit" :disabled="requiredCompleted" />
+      </p>
+    </form>
   </div>
 </template>
 
@@ -55,7 +55,6 @@ export default {
   },
   computed: {
     steps() {
-      console.log("in computed ", this.config);
       return this.config ? this.config.steps : null;
     },
 
@@ -81,14 +80,13 @@ export default {
         });
       });
 
-      console.log("config - ", this.config);
       this.error = this.configValidation(usedConfiguration)
         ? null
         : "The configuration is not valid!";
     },
 
     submit() {
-      this.$router.push({path: "/about?", query: this.generateOutput()});
+      this.$router.push({ path: "/output?", query: this.generateOutput() });
     },
 
     generateOutput() {
@@ -117,7 +115,6 @@ export default {
     },
 
     completed(data) {
-      console.log("completed from Questionnaire - ", data);
       this.$set(this.answers, data.questionId, data.answer);
       if (data.required) {
         this.$set(this.requiredQuestions, data.questionId, data.answer);
@@ -125,8 +122,12 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$route.query);
-    if (this.$route.query) {
+    if (
+      !(
+        Object.keys(this.$route.query).length === 0 &&
+        this.$route.query.constructor === Object
+      )
+    ) {
       let conf = this.$route.query;
 
       for (let i = 0; i < conf.steps.length; i++) {
@@ -136,13 +137,11 @@ export default {
         for (let j = 0; j < conf.steps[i].length; j++) {
           conf.steps[i][j] = JSON.parse(conf.steps[i][j]);
         }
-      };
+      }
       this.getConfig(conf);
     } else {
       this.getConfig();
     }
-
-    console.log("beforeMount ", this.config);
   }
 };
 </script>

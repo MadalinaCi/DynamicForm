@@ -10,7 +10,7 @@ const routes = [
     path: "/",
     name: "Questionnaire",
     component: Questionnaire,
-    props: { prop: 'yes'}
+    props: { prop: "yes" }
   },
   {
     path: "/create",
@@ -18,13 +18,13 @@ const routes = [
     component: CreateForm
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/output",
+    name: "Output",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "../views/Output.vue")
   }
 ];
 

@@ -94,10 +94,10 @@ export default {
       ],
       typesMapping: {
         "multiple answers (checkbox)": "checkbox",
-        "text": "text",
+        text: "text",
         "single answer (radio btn)": "radiobtn",
-        "date": "datepicker",
-        "dropdown": "dropdown"
+        date: "datepicker",
+        dropdown: "dropdown"
       },
       toggleContent: "SAVE"
     };
@@ -139,7 +139,6 @@ export default {
       question.answerList =
         question.answerList.length == 0 ? undefined : question.answerList;
 
-      console.log("question = ", question);
       this.$emit("qupdate", question);
     }
   }

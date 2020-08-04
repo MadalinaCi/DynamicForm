@@ -1,16 +1,19 @@
 <template>
-  <div :class="{question: true, required: required}">
+  <div :class="{ question: true, required: required }">
     <slot></slot>
-    <Answer :type="answerType"
-            :list="answerList"
-            :required="required"
-            :questionId="questionId"
-            @completed="completed"></Answer>
+    <Answer
+      :type="answerType"
+      :list="answerList"
+      :required="required"
+      :questionId="questionId"
+      @completed="completed"
+    ></Answer>
   </div>
 </template>
 
 <script>
-  import Answer from "./Answer.vue";
+import Answer from "./Answer.vue";
+
 export default {
   name: "Question",
   components: {
@@ -36,11 +39,11 @@ export default {
     answerList: Array
   },
   mounted() {
-    console.log('in Question, ',this.props);
+    console.log("in Question, ", this.props);
   },
   methods: {
     completed(data) {
-      this.$emit('completed', data);
+      this.$emit("completed", data);
     }
   }
 };
@@ -63,14 +66,14 @@ a {
   color: #42b983;
 }
 
-  .question {
-    margin: 15px;
-    font-size: 20px;
-    margin-left: 50px;
-  }
+.question {
+  margin: 15px;
+  font-size: 20px;
+  margin-left: 50px;
+}
 
 .required:before {
-  content:" *";
+  content: " *";
   color: red;
 }
 </style>

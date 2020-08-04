@@ -10,7 +10,7 @@
       <button class="remove" v-on:click="removeQuestion(key)">REMOVE</button>
     </FormQuestion>
     <button v-on:click="addNewQuestion()">ADD new question</button>
-      <slot name="removeGroup"></slot>
+    <slot name="removeGroup"></slot>
   </div>
 </template>
 
@@ -21,32 +21,32 @@ export default {
   components: {
     FormQuestion
   },
-    props: {
-      id: {
-          type: String,
-          required: true
-      }
-    },
+  props: {
+    id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
-      const uid = this.generateUniqueId();
-      var questions = Object.fromEntries([[uid, ""]]);
-      return {
-          questions: questions
-      };
+    const uid = this.generateUniqueId();
+    var questions = Object.fromEntries([[uid, ""]]);
+    return {
+      questions: questions
+    };
   },
   methods: {
     addNewQuestion(question) {
       if (question && question.questionId) {
-          this.$set(this.questions, question.questionId, question);
+        this.$set(this.questions, question.questionId, question);
       } else {
-          const id = this.generateUniqueId();
-          this.$set(this.questions, id, "");
+        const id = this.generateUniqueId();
+        this.$set(this.questions, id, "");
       }
-        this.sendGUpdate();
+      this.sendGUpdate();
     },
     removeQuestion(id) {
       this.$delete(this.questions, id);
-        this.sendGUpdate();
+      this.sendGUpdate();
     },
     questionUpdate(data) {
       this.addNewQuestion(data);
@@ -64,20 +64,12 @@ export default {
       return uuid;
     },
     sendGUpdate() {
-        const questions =  Object.values(this.questions).filter((el) => {
-            return typeof el === 'object' && el !== null;
-        });
-        this.$emit("gupdate", {id: this.id, g: questions});
+      const questions = Object.values(this.questions).filter(el => {
+        return typeof el === "object" && el !== null;
+      });
+      this.$emit("gupdate", { id: this.id, g: questions });
     }
-  },
-  /*  watch: {
-        questions: function () {
-            const questions =  Object.values(this.questions).filter((el) => {
-                return typeof el === 'object' && el !== null;
-            });
-            this.$emit("gupdate", {id: this.id, g: questions});
-        }
-    }*/
+  }
 };
 </script>
 

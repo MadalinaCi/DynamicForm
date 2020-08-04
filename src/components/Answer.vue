@@ -75,13 +75,25 @@ export default {
   },
   watch: {
     singleAnswer: function() {
-      this.$emit("completed", {answer: this.singleAnswer, questionId: this.questionId, required: this.required});
+      this.$emit("completed", {
+        answer: this.singleAnswer,
+        questionId: this.questionId,
+        required: this.required
+      });
     },
     multipleAnswers: function() {
-      this.$emit("completed", {answer: this.multipleAnswers, questionId: this.questionId, required: this.required});
+      this.$emit("completed", {
+        answer: this.multipleAnswers,
+        questionId: this.questionId,
+        required: this.required
+      });
     },
     dropdownValue: function() {
-      this.$emit("completed", {answer: this.dropdownValue, questionId: this.questionId, required: this.required});
+      this.$emit("completed", {
+        answer: this.dropdownValue,
+        questionId: this.questionId,
+        required: this.required
+      });
     }
   }
 };
